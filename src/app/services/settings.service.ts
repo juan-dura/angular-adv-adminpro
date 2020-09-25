@@ -7,23 +7,20 @@ export class SettingsService {
 
   private linkTheme = document.querySelector('#theme');
 
-
   constructor() {
     const url = localStorage.getItem('theme') || "./assets/css/colors/purple-dark.css";
     this.linkTheme.setAttribute('href',url);
    }
 
-   changeTheme( theme: string) {
+   changeTheme( theme: string, links: NodeListOf<Element>) {
     const url = `./assets/css/colors/${theme}.css`;
     this.linkTheme.setAttribute('href',url);
     localStorage.setItem('theme', url);
 
-    this.checkCurrentTheme();
+    this.checkCurrentTheme(links);
   }
 
-  checkCurrentTheme() {
-    const links: NodeListOf<Element> = document.querySelectorAll('.selector');;
-
+  checkCurrentTheme(links: NodeListOf<Element>) {
 
     //eliminar la clase working de quien la tenga, y poner el correcto
     links.forEach(element => {
